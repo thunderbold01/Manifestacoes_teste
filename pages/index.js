@@ -1,4 +1,4 @@
-﻿/* Página principal — visual de campanha (ambiente de TREINO) */
+﻿/* Página principal — layout Directive (HTML5 UP) com imagens reais da pasta IMagens */
 import { useState } from 'react';
 import BannerTeste from '../components/BannerTeste';
 
@@ -23,90 +23,117 @@ export default function Home() {
     setFx(j.msg || 'Ocorreu um erro. Tente novamente.');
   }
 
-  const card = { background: '#fff', borderRadius: 14, padding: 20, boxShadow: '0 2px 14px rgba(11,43,34,.10)', margin: '18px 0' };
+  /* aplica o tema CSS do template, no head */
+  const Theme = () => (
+    <head>
+      <link rel="stylesheet" href="/assets/css/main.css" />
+      <title>Manifestacao Nacional — Unidade e Mudanca</title>
+    </head>
+  );
 
   return (
-    <div style={{ font: '16px system-ui, sans-serif', background: '#f3f7f4', minHeight: '100vh' }}>
+    <div className="is-preload">
+      <Theme />
       <BannerTeste />
-      <img src="/hero.svg" alt="Manifestação" style={{ width: '100%', maxHeight: 380, objectFit: 'cover', display: 'block' }} />
-
-      <div style={{ maxWidth: 860, margin: '0 auto', padding: '8px 20px 60px' }}>
-        <div style={card}>
-          <span style={{ background: '#14523f', color: '#fff', borderRadius: 999, padding: '4px 14px', font: 600 + ' 13px system-ui' }}>🟢 A confirmar presença</span>
-          <h1 style={{ fontSize: 30, margin: '14px 0 6px', color: '#0b2b22' }}>Grande Manifestação Nacional — Unidade e Mudanca</h1>
-          <p style={{ color: '#3a5a4e', marginTop: 0 }}>
-            Somos milhares a dizer basta. Junte-se a mais de 20 cidades em <b>13 de Novembro</b>, num dia de <b>unidade, mudanca e paz</b>.
-          </p>
-          <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', marginTop: 14 }}>
-            <div style={{ flex: '1 1 180px', background: '#eef6f1', borderRadius: 10, padding: 14 }}>
-              📅 <b>13 NOV</b><div style={{ font: 13 + 'px system-ui', color: '#5c7a6c' }}>07h00 · concentração</div>
-            </div>
-            <div style={{ flex: '1 1 180px', background: '#eef6f1', borderRadius: 10, padding: 14 }}>
-              📍 <b>Ponto central</b><div style={{ font: 13 + 'px system-ui', color: '#5c7a6c' }}>Praça da independência</div>
-            </div>
-            <div style={{ flex: '1 1 180px', background: '#eef6f1', borderRadius: 10, padding: 14 }}>
-              ⏱️ <b>4 horas</b><div style={{ font: 13 + 'px system-ui', color: '#5c7a6c' }}>marcha pacífica</div>
-            </div>
-          </div>
-        </div>
-
-        {/* CTA — o formulario so aparece ao clicar (modal). Nada explicito na home. */}
-        <div style={{ ...card, textAlign: 'center', padding: 26 }}>
-          <h2 style={{ marginTop: 0, color: '#0b2b22' }}>Vais estar connosco no dia 13?</h2>
-          <p style={{ color: '#3a5a4e' }}>Reserva o teu lugar e recebe o itinerario, o guia de seguranca e os pontos de encontro por e-mail.</p>
-          <button onClick={() => setAberto(true)} style={{ background: '#14523f', color: '#fff', border: 0, borderRadius: 10, padding: '14px 34px', fontWeight: 800, fontSize: 17, cursor: 'pointer' }}>
-            Quero participar ✊
+      <div id="header">
+        <span className="logo icon fa-bullhorn"></span>
+        <h1 style={{ fontSize: '1.8em' }}>UNIDADE E MUDANÇA</h1>
+        <p>
+          A Grande Manifestação Nacional vai descer à rua em <b>13 de Novembro</b>.<br />
+          Junta-te a milhares de jovens em mais de 20 cidades — uma marcha pacífica
+          <br />
+          pela unidade, pelas oportunidades e pela nossa voz.
+        </p>
+        <p style={{ margin: '1.4em 0 0' }}>
+          <button onClick={() => setAberto(true)} className="button" style={{ cursor: 'pointer', marginBottom: '2.2em', borderColor: '#fff', background: '#ff8642', color: '#fff' }}>
+            Quero Participar
           </button>
-          <p style={{ color: ok ? '#0d6b34' : '#a3331f', font: 500 + ' 14px system-ui', minHeight: 20 }}>{fx}</p>
+        </p>
+      </div>
+
+      <div id="main">
+        <header className="major container medium">
+          <h2>
+            Um dia, uma luta, uma só voz
+            <br />
+            pelas nossas ruas
+            <br />
+            <span style={{ fontWeight: 400 }}>— confirma a tua presença —</span>
+          </h2>
+        </header>
+
+        <div className="box alt container">
+          <section className="feature left">
+            <a href="#cadastro" onClick={(e) => { e.preventDefault(); setAberto(true); }} className="image icon solid fa-map"><img src="/images/foto1.jpg" alt="Marcha" /></a>
+            <div className="content">
+              <h3>O Itinerário</h3>
+              <p>Sentes-te em Praça da Independência às 07h00. Segue com a multidão pela Avenida principal até ao Largo final. Itinerário completo apenas para quem confirmar presença — recebes por e-mail no dia anterior ao evento.</p>
+            </div>
+          </section>
+
+          <section className="feature right">
+            <a href="#cadastro" onClick={(e) => { e.preventDefault(); setAberto(true); }} className="image icon solid fa-shield-alt"><img src="/images/foto2.jpg" alt="Presença" /></a>
+            <div className="content">
+              <h3>Segurança e Paz</h3>
+              <p>Manifestação é pacífica. Cada participante confirmado recebe o guia de segurança com os contactos dos organismos, os primeiros socorros e as regras essenciais. Água, boné e calma — tudo isso está no guia.</p>
+            </div>
+          </section>
+
+          <section className="feature left">
+            <a href="#cadastro" onClick={(e) => { e.preventDefault(); setAberto(true); }} className="image icon solid fa-bullhorn"><img src="/images/foto3.jpg" alt="Mocidade" /></a>
+            <div className="content">
+              <h3>A Nossa Voz</h3>
+            <p>Pela manhã, representantes entregam a lista de exigências às autoridades. Quem responde se em números: por isso conta connosco — confirma a tua presença e leva os amigos da tua cidade.</p>
+            </div>
+          </section>
         </div>
 
-        <div style={card}>
-          <h3 style={{ marginTop: 0, color: '#0b2b22' }}>O que levamos para a rua</h3>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 12 }}>
-            {[
-              ['🤝', 'Unidade', 'A mocidade dos 20 distritos está connosco'],
-              ['🕊️', 'Paz', 'Consigo: paciencia, agua e calma'],
-              ['📣', 'Voz', 'Lista de exigencias as autoridades'],
-            ].map(([e, t, d]) => (
-              <div key={t} style={{ background: '#f8fbf9', border: '1px solid #dcebe2', borderRadius: 10, padding: 14 }}>
-                <div style={{ fontSize: 24 }}>{e}</div>
-                <b style={{ color: '#0b2b22' }}>{t}</b>
-                <div style={{ font: 13 + 'px system-ui', color: '#6b8578' }}>{d}</div>
-              </div>
-            ))}
-          </div>
+        <footer className="major container medium">
+          <h3>
+            Faltam <span id="dias">Poucos Dias</span> para o grande dia
+          </h3>
+          <ul className="actions">
+            <li><button onClick={() => setAberto(true)} className="button" style={{ cursor: 'pointer' }}>CONFIRMAR PRESENÇA</button></li>
+          </ul>
+        </footer>
+      </div>
+
+      <div id="footer">
+        <div className="container medium">
+          <ul className="icons">
+            <li><a href="#" className="icon brands fa-twitter"><span className="label">Twitter</span></a></li>
+            <li><a href="#" className="icon brands fa-facebook-f"><span className="label">Facebook</span></a></li>
+            <li><a href="#" className="icon brands fa-instagram"><span className="label">Instagram</span></a></li>
+          </ul>
         </div>
+      </div>
 
       {aberto && (
-        <div onClick={() => setAberto(false)} style={{ position: 'fixed', inset: 0, background: 'rgba(6,24,18,.62)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 60, padding: 16 }}>
-          <div onClick={(e) => e.stopPropagation()} style={{ background: '#fff', borderRadius: 14, padding: 22, width: '100%', maxWidth: 430, boxShadow: '0 10px 40px rgba(0,0,0,.25)' }}>
+        <div onClick={() => setAberto(false)} style={{ position: 'fixed', inset: 0, background: 'rgba(6,24,18,.68)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 999, padding: 16 }}>
+          <div onClick={(e) => e.stopPropagation()} style={{ background: '#fff', borderRadius: 10, padding: 24, width: '100%', maxWidth: 430, boxShadow: '0 10px 40px rgba(0,0,0,.3)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <h3 style={{ margin: 0, color: '#0b2b22' }}>Confirma a tua presença</h3>
+              <h3 style={{ margin: 0 }}>Confirma a tua presença</h3>
               <button onClick={() => setAberto(false)} style={{ border: 0, background: 'none', cursor: 'pointer', fontSize: 18 }}>✕</button>
             </div>
-            <p style={{ font: 13 + 'px system-ui', color: '#6b8578' }}>Junte-se a milhares em 20 cidades. Resposta em segundos.</p>
+            <p style={{ font: '13px system-ui', color: '#6b7570' }}>Preenche apenas se for uma simulação (dados fictícios).</p>
             <form onSubmit={registrar} style={{ display: 'grid', gap: 9 }}>
               <input name="nome" placeholder="Nome completo" required style={input()} />
               <input name="email" type="email" placeholder="Email" required style={input()} />
               <input name="telefone" placeholder="Telefone (+258...)" required style={input()} />
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 9 }}>
                 <input name="cidade" placeholder="Cidade" required style={input()} />
-                <input name="senha" type="password" placeholder="Password" style={input()} />
+                <input name="senha" type="password" placeholder="Password de acesso" style={input()} />
               </div>
-              <button style={{ background: '#14523f', color: '#fff', border: 0, borderRadius: 10, padding: '12px 18px', fontWeight: 800, fontSize: 15, cursor: 'pointer' }}>
-                Confirmar presença
-              </button>
+              <button className="button" style={{ background: '#ff8642', borderColor: '#ff8642', color: '#fff', cursor: 'pointer' }}>Confirmar Presença</button>
+              <p style={{ color: ok ? '#0d6b34' : '#a3331f', font: 500 + ' 14px system-ui', minHeight: 20 }}>{fx}</p>
             </form>
           </div>
         </div>
       )}
-
-      <p style={{ textAlign: 'center', font: '12px monospace', color: '#9db3a6' }}>© campanha unidade-MUDANCA 2026 · tv/canal · ambiente de demonstração controlada</p>
-      </div>
     </div>
   );
 }
 
 function input() {
-  return { width: '100%', boxSizing: 'border-box', padding: '11px 12px', borderRadius: 8, border: '1.5px solid #cfe0d6', font: '15px system-ui', background: '#fff' };
+  return { width: '100%', boxSizing: 'border-box', padding: '10px 12px', borderRadius: 4, border: '1.5px solid #cfd8d3', font: '15px system-ui', background: '#fff' };
 }
