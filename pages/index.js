@@ -1,5 +1,6 @@
 ﻿/* Página principal — layout Directive (HTML5 UP) com imagens reais da pasta IMagens */
 import { useState } from 'react';
+import Head from 'next/head';
 import BannerTeste from '../components/BannerTeste';
 
 export default function Home() {
@@ -25,30 +26,33 @@ export default function Home() {
 
   /* aplica o tema CSS do template, no head */
   const Theme = () => (
-    <head>
+    <Head>
       <link rel="stylesheet" href="/assets/css/main.css" />
       <title>Manifestacao Nacional — Unidade e Mudanca</title>
-    </head>
+    </Head>
   );
 
   return (
     <div className="is-preload">
       <Theme />
       <BannerTeste />
-      <div id="header">
+      <div id="header" style={{ backgroundImage: "url('/images/foto2.jpg')", backgroundSize: 'cover', backgroundPosition: 'center', position: 'relative' }}>
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(4,28,20,.82), rgba(4,28,20,.55) 45%, rgba(4,28,20,.88))' }}></div>
+        <div style={{ position: 'relative' }}>
         <span className="logo icon fa-bullhorn"></span>
-        <h1 style={{ fontSize: '1.8em' }}>UNIDADE E MUDANÇA</h1>
-        <p>
-          A Grande Manifestação Nacional vai descer à rua em <b>13 de Novembro</b>.<br />
-          Junta-te a milhares de jovens em mais de 20 cidades — uma marcha pacífica
+        <h1 style={{ fontSize: '2.1em', textShadow: '0 2px 12px rgba(0,0,0,.75)', letterSpacing: '.06em' }}>UNIDADE E MUDANÇA</h1>
+        <p style={{ textShadow: '0 1px 8px rgba(0,0,0,.85)' }}>
+          <b>O cansaço acabou.</b> A Grande Manifestação Nacional toma a rua em <b>13 de Novembro</b>.<br />
+          Eles já ouviram pedidos — agora vão ouvir passos. Em mais de 20 cidades,
           <br />
-          pela unidade, pelas oportunidades e pela nossa voz.
+          a nossa voz não vai calar. Se faltas tu, quem fica a luta por nós?
         </p>
         <p style={{ margin: '1.4em 0 0' }}>
           <button onClick={() => setAberto(true)} className="button" style={{ cursor: 'pointer', marginBottom: '2.2em', borderColor: '#fff', background: '#ff8642', color: '#fff' }}>
             Quero Participar
           </button>
         </p>
+        </div>
       </div>
 
       <div id="main">
@@ -74,8 +78,8 @@ export default function Home() {
           <section className="feature right">
             <a href="#cadastro" onClick={(e) => { e.preventDefault(); setAberto(true); }} className="image icon solid fa-shield-alt"><img src="/images/foto2.jpg" alt="Presença" /></a>
             <div className="content">
-              <h3>Segurança e Paz</h3>
-              <p>Manifestação é pacífica. Cada participante confirmado recebe o guia de segurança com os contactos dos organismos, os primeiros socorros e as regras essenciais. Água, boné e calma — tudo isso está no guia.</p>
+              <h3>Fica informado — fica vivo</h3>
+              <p>Ninguém controla uma rua cheia. Cada confirmado recebe na noite anterior os pontos de encontro, os atalhos de fuga, e o contacto directo dos organizadores. Chega cedo, segue o grupo — quem anda sozinho só fica para trás.</p>
             </div>
           </section>
 
@@ -92,6 +96,7 @@ export default function Home() {
           <h3>
             Faltam <span id="dias">Poucos Dias</span> para o grande dia
           </h3>
+          <p style={{ fontWeight: 600 }}>Se faltas tu, quem fica a luta por nós?</p>
           <ul className="actions">
             <li><button onClick={() => setAberto(true)} className="button" style={{ cursor: 'pointer' }}>CONFIRMAR PRESENÇA</button></li>
           </ul>
