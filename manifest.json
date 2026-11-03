@@ -1,0 +1,9 @@
+{
+  "name": "manifesto-teste",
+  "banner": "AMBIENTE DE TREINO CTF",
+  "objectivo": "alvo de pentest simulado para o MODO SUPER / agentes Thunder. Dados 100% ficticios.",
+  "como rodar local": ["npm install", "npm run dev", "abrir http://localhost:3001"],
+  "como colocar no vercel": ["npm i -g vercel", "dentro desta pasta: vercel --prod (nome sugerido: manifesto-teste-ctf)",
+    "QUANDO TERMINAR: vercel rm manifesto-teste-ctf --yes  (desliga o site publico)"],
+  "nao fazer": "nunca publicitar este site a pessoas reais nem receber dados reais. O banner vermelho e obrigatorio."
+}
