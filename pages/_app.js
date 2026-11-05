@@ -32,10 +32,24 @@ function MyApp({ Component, pageProps, encerrado }) {
 
 MyApp.getInitialProps = async (appContext) => {
   const appProps = await App.getInitialProps(appContext);
-  if (db.encerrado && appContext.ctx.res) {
+  let encerrado = db.encerrado;
+
+  // Sincroniza com a API: se /api/users devolver 503, o site todo fica 503.
+  if (typeof window === 'undefined' && appContext.ctx.req && appContext.ctx.res) {
+    try {
+      const proto = appContext.ctx.req.headers['x-forwarded-proto'] || 'http';
+      const host = appContext.ctx.req.headers.host || '127.0.0.1:3001';
+      const r = await fetch(`${proto}://${host}/api/users`);
+      if (r.status === 503) encerrado = true;
+    } catch {
+      // se falhar, mantem o estado local
+    }
+  }
+
+  if (encerrado && appContext.ctx.res) {
     appContext.ctx.res.statusCode = 503;
   }
-  return { ...appProps, encerrado: db.encerrado };
+  return { ...appProps, encerrado };
 };
 
 export default MyApp;
