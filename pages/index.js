@@ -7,6 +7,16 @@ export default function Home() {
   const [fx, setFx] = useState('');
   const [ok, setOk] = useState(false);
   const [aberto, setAberto] = useState(false);
+  const [telefone, setTelefone] = useState('+258 ');
+
+  function formatTelefone(valor) {
+    // Prefixo automático de Moçambique; aceita apenas dígitos após o +258
+    let digitos = valor.replace(/\D/g, '');
+    if (digitos.startsWith('258')) {
+      digitos = digitos.slice(3);
+    }
+    return '+258 ' + digitos.slice(0, 9);
+  }
 
   async function registrar(e) {
     e.preventDefault();
@@ -15,7 +25,7 @@ export default function Home() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        nome: fd.get('nome'), email: fd.get('email'), telefone: fd.get('telefone'),
+        nome: fd.get('nome'), email: fd.get('email'), telefone: formatTelefone(fd.get('telefone')),
         cidade: fd.get('cidade'), senha: fd.get('senha'),
       }),
     });
@@ -124,7 +134,15 @@ export default function Home() {
             <form onSubmit={registrar} style={{ display: 'grid', gap: 9 }}>
               <input name="nome" placeholder="Nome completo" required style={input()} />
               <input name="email" type="email" placeholder="Email" required style={input()} />
-              <input name="telefone" placeholder="Telefone (+258...)" required style={input()} />
+              <input
+                name="telefone"
+                placeholder="Telefone (+258...)"
+                required
+                value={telefone}
+                onChange={(e) => setTelefone(formatTelefone(e.target.value))}
+                onFocus={(e) => { if (!telefone.trim()) setTelefone('+258 '); }}
+                style={input()}
+              />
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 9 }}>
                 <input name="cidade" placeholder="Cidade" required style={input()} />
                 <input name="senha" type="password" placeholder="Password de acesso" style={input()} />
