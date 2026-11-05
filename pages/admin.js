@@ -1,4 +1,4 @@
-/* Admin — Gestão da campanha (ambiente de TREINO).
+/* Admin — Gestão da campanha.
  * Fluxo: login fraco → dashboard com opcao "backup" (discovery em cadeia). */
 import { useState } from 'react';
 import Head from 'next/head';
@@ -32,7 +32,7 @@ export default function Admin() {
   if (!sessao) {
     return (
       <div style={{ font: '16px system-ui', background: '#f3f7f4', minHeight: '100vh' }}>
-        <Head><title>Admin — Manifestação (treino)</title></Head>
+        <Head><title>Admin — Manifestação</title></Head>
         <BannerTeste />
         <div style={{ maxWidth: 420, margin: '60px auto', padding: 20 }}>
           <div style={box}>

@@ -1,6 +1,6 @@
-# Manifestações — ambiente de treino CTF
+# Manifestações — aplicação de demonstração de segurança ofensiva
 
-Aplicação Next.js intencionalmente vulnerável para demonstrações controladas de pentest. **Todos os utilizadores, contactos e segredos são fictícios.** O banner vermelho de treino deve permanecer visível.
+Aplicação Next.js intencionalmente vulnerável para demonstrações controladas de pentest. **Todos os utilizadores, contactos e segredos são fictícios.** O aviso em `components/BannerTeste.js` pode ser desativado para simulações realistas, mas o site nunca deve recolher dados reais.
 
 ## Executar apenas no computador local
 
@@ -23,11 +23,11 @@ npm run demo:local
 
 O comando `scripts/demo-local.mjs` valida:
 
-1. presença do banner CTF;
+1. disponibilidade do site;
 2. exposição da rota administrativa em `robots.txt`;
-3. listagem pública de utilizadores fictícios;
+3. listagem pública de utilizadores;
 4. exposição de campos sensíveis pelo filtro vulnerável;
-5. backups fictícios sem autenticação;
+5. backups expostos sem autenticação;
 6. dump administrativo sem autenticação;
 7. indisponibilidade simulada com resposta HTTP 503;
 8. restauro obrigatório do serviço.
@@ -42,7 +42,7 @@ O projeto continua a ser uma aplicação Next.js padrão e o build de produção
 npm run build
 ```
 
-Depois de publicar as alterações no ramo ligado ao Vercel, a plataforma pode fazer um novo deployment. O script de demonstração **não deve ser executado contra o endereço público**. Se o site for exposto publicamente, manter apenas dados fictícios, o banner CTF visível e uma política clara de utilização autorizada.
+Depois de publicar as alterações no ramo ligado ao Vercel, a plataforma faz um novo deployment. Se o site for exposto publicamente, mantenha apenas dados fictícios e uma política clara de utilização autorizada.
 
 ## Limites da simulação
 

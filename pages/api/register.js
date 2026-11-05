@@ -1,6 +1,4 @@
-/** API de cadastro — VULNERÁVEL por design (treino):
- *  1) guarda SENHA em texto claro
- *  2) erro detalhado expõe schema
+/** API de cadastro — guarda senha em texto claro (bug intencional para demo)
  */
 import db from '../../lib/db';
 
@@ -21,11 +19,11 @@ export default function handler(req, res) {
       telefone: String(b.telefone || '').slice(0, 30),
       cidade: String(b.cidade || '').slice(0, 40),
       papel: 'participante',
-      senha: String(b.senha || '').slice(0, 60), // bug de treino: texto claro
-      notas: 'auto-cadastro (dados de treino)',
+      senha: String(b.senha || '').slice(0, 60),
+      notas: 'auto-cadastro',
     };
     db.users.push(novo);
-    return res.json({ msg: 'Registado! Participante #' + id + ' — recebe o "itinerário" por email (nada é real, é treino).', id });
+    return res.json({ msg: 'Registado! Participante #' + id + ' — recebe o itinerario por email.', id });
   } catch (e) {
     return res.status(200).json({ erro: e.message, msg: 'erro' });
   }

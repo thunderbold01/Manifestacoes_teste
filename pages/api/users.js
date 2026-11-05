@@ -1,6 +1,6 @@
-/** GET /api/users?filter=<str> — VULNERAVEL: "SQL injection" na regiao filter
+/** GET /api/users?filter=<str> — VULNERAVEL: injecao na regiao filter
  *  /api/users                     → lista publica (so nome/cidade)
- *  /api/users?filter=a' or '1'='1 → "injecao": devolve tudo com SENHAS
+ *  /api/users?filter=a' or '1'='1 → devolve tudo com SENHAS
  *  /api/users?filter=papel=admin  → descobre admin
  */
 import db from '../../lib/db';
@@ -28,5 +28,5 @@ export default function handler(req, res) {
     colunas.forEach((c) => (o[c] = u[c]));
     return o;
   });
-  return res.json({ total: out.length, usuarios: out, aviso: 'ambiente de treino — dados ficticios' });
+  return res.json({ total: out.length, usuarios: out });
 }
