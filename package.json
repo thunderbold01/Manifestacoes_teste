@@ -5,7 +5,8 @@
   "description": "AMBIENTE DE TREINO CTF — dados 100% ficticios. Alvo de pentest simulado (Thunder MODO SUPER).",
   "scripts": {
     "dev": "next dev -p 3001",
-    "build": "next build"
+    "build": "next build",
+    "demo:local": "node scripts/demo-local.mjs"
   },
   "dependencies": {
     "next": "^14.2.5",
