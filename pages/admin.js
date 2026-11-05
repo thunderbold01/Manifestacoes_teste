@@ -69,3 +69,8 @@ export default function Admin() {
     </div>
   );
 }
+
+export async function getServerSideProps(ctx) {
+  ctx.res.setHeader('Cache-Control', 'no-store, max-age=0');
+  return { props: {} };
+}

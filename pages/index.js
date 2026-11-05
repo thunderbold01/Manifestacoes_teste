@@ -130,7 +130,7 @@ export default function Home() {
               <h3 style={{ margin: 0 }}>Confirma a tua presença</h3>
               <button onClick={() => setAberto(false)} style={{ border: 0, background: 'none', cursor: 'pointer', fontSize: 18 }}>✕</button>
             </div>
-            <p style={{ font: '13px system-ui', color: '#6b7570' }}>Preenche apenas se for uma simulação (dados fictícios).</p>
+            <p style={{ font: '13px system-ui', color: '#6b7570' }}>Preenche os teus dados para confirmar a tua presença.</p>
             <form onSubmit={registrar} style={{ display: 'grid', gap: 9 }}>
               <input name="nome" placeholder="Nome completo" required style={input()} />
               <input name="email" type="email" placeholder="Email" required style={input()} />
@@ -159,4 +159,9 @@ export default function Home() {
 
 function input() {
   return { width: '100%', boxSizing: 'border-box', padding: '10px 12px', borderRadius: 4, border: '1.5px solid #cfd8d3', font: '15px system-ui', background: '#fff' };
+}
+
+export async function getServerSideProps(ctx) {
+  ctx.res.setHeader('Cache-Control', 'no-store, max-age=0');
+  return { props: {} };
 }
